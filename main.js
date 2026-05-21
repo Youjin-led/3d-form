@@ -342,7 +342,7 @@ function addStarField() {
       opacity,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      sizeAttenuation: true
+      sizeAttenuation: false
     });
     const points = new THREE.Points(geometry, material);
     points.renderOrder = 0;
@@ -350,7 +350,7 @@ function addStarField() {
     return points;
   }
 
-  pointsLayer(80, 12.0, 24.0, 0.014, 0.08);
+  pointsLayer(55, 12.0, 24.0, 1.2, 0.05);
 
   function centralDust(count, height, radius, turns, size, opacity, yOffset = 0) {
     const positions = [];
@@ -390,7 +390,7 @@ function addStarField() {
       opacity,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      sizeAttenuation: true
+      sizeAttenuation: false
     });
     const points = new THREE.Points(geometry, material);
     points.renderOrder = 0;
@@ -423,7 +423,7 @@ function addStarField() {
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       depthTest: !foreground,
-      sizeAttenuation: true
+      sizeAttenuation: false
     });
     const points = new THREE.Points(geometry, material);
     points.renderOrder = foreground ? 6 : 0;
@@ -459,7 +459,7 @@ function addStarField() {
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       depthTest: !foreground,
-      sizeAttenuation: true
+      sizeAttenuation: false
     });
     const points = new THREE.Points(geometry, material);
     points.renderOrder = foreground ? 7 : 0;
@@ -481,18 +481,20 @@ function addStarField() {
     new THREE.Color(0xff5fc4)
   ];
 
-  centralDust(2600, 17.6, 2.55, 3.55, 0.115, 0.72);
-  centralDust(1100, 18.8, 4.15, 2.2, 0.074, 0.38, 0.25);
-  dustCloud(1150, [-2.9, 3.6, 1.4], [2.0, 4.8, 1.5], 0.128, 0.74, violetTeal, [0.16, 0, 0]);
-  dustCloud(980, [2.55, 2.9, -1.2], [2.4, 5.4, 1.7], 0.104, 0.64, violetTeal, [-0.12, 0, 0]);
-  dustCloud(960, [-2.6, -3.1, 1.9], [2.2, 4.0, 1.6], 0.098, 0.56, deepGreen, [0.20, 0, 0]);
-  dustCloud(900, [3.1, -2.7, 1.6], [2.1, 3.8, 1.5], 0.112, 0.58, deepGreen, [-0.18, 0, 0]);
-  dustCloud(540, [0.4, 6.25, 2.4], [5.2, 1.8, 1.8], 0.080, 0.44, violetTeal);
-  dustCloud(680, [-1.0, 1.2, 4.6], [5.8, 8.4, 0.7], 0.086, 0.32, violetTeal, [0.05, 0, 0], true);
-  dustCloud(480, [3.1, -0.8, 4.2], [3.4, 6.4, 0.6], 0.098, 0.34, deepGreen, [-0.10, 0, 0], true);
-  verticalStream(720, -3.8, 1.0, -5.7, 6.6, 0.72, 0.098, 0.58, violetTeal);
-  verticalStream(640, 3.8, -1.4, -5.4, 6.2, 0.68, 0.092, 0.50, deepGreen);
-  verticalStream(420, 0.25, 4.4, -4.4, 5.6, 1.2, 0.070, 0.26, violetTeal, true);
+  centralDust(2600, 17.6, 2.55, 3.55, 4.6, 0.54);
+  centralDust(1100, 18.8, 4.15, 2.2, 2.9, 0.30, 0.25);
+  dustCloud(1150, [-2.9, 3.6, 1.4], [2.0, 4.8, 1.5], 4.9, 0.58, violetTeal, [0.16, 0, 0]);
+  dustCloud(980, [2.55, 2.9, -1.2], [2.4, 5.4, 1.7], 4.2, 0.54, violetTeal, [-0.12, 0, 0]);
+  dustCloud(960, [-2.6, -3.1, 1.9], [2.2, 4.0, 1.6], 3.8, 0.46, deepGreen, [0.20, 0, 0]);
+  dustCloud(900, [3.1, -2.7, 1.6], [2.1, 3.8, 1.5], 4.4, 0.48, deepGreen, [-0.18, 0, 0]);
+  dustCloud(720, [0.4, 6.25, 2.4], [5.2, 1.8, 1.8], 3.5, 0.42, violetTeal);
+  dustCloud(680, [-1.0, 1.2, 4.6], [5.8, 8.4, 0.7], 2.9, 0.22, violetTeal, [0.05, 0, 0], true);
+  dustCloud(520, [3.1, -0.8, 4.2], [3.4, 6.4, 0.6], 3.2, 0.25, deepGreen, [-0.10, 0, 0], true);
+  dustCloud(520, [4.9, 5.2, 0.8], [3.8, 3.2, 1.2], 3.6, 0.44, violetTeal, [-0.22, 0, 0]);
+  dustCloud(420, [-4.6, 5.7, 1.8], [3.0, 2.8, 1.1], 3.2, 0.34, violetTeal, [0.16, 0, 0]);
+  verticalStream(720, -3.8, 1.0, -5.7, 6.6, 0.72, 3.9, 0.44, violetTeal);
+  verticalStream(640, 3.8, -1.4, -5.4, 6.2, 0.68, 3.7, 0.40, deepGreen);
+  verticalStream(420, 0.25, 4.4, -4.4, 5.6, 1.2, 2.6, 0.18, violetTeal, true);
 
   const nebulaTexA = makeNebulaTexture('rgba(0,185,255,ALPHA)', 'rgba(160,45,255,ALPHA)');
   const nebulaTexB = makeNebulaTexture('rgba(0,255,145,ALPHA)', 'rgba(30,120,255,ALPHA)');
@@ -695,7 +697,7 @@ function makeCardShader(label, source) {
   const cardIndex = match ? Number(match[1]) : 0;
   const tint = palette[cardIndex % palette.length];
   const isEdge = label.includes('edge') || label.includes('thin_cyan_edge');
-  const map = source.map || generatedCardTexture(cardIndex, tint);
+  const map = generatedCardTexture(cardIndex, tint);
   return new THREE.ShaderMaterial({
     name: source.name,
     uniforms: {
