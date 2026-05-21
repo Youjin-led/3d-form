@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spine Orbit Scene</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./vendor/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="stage" aria-label="3D spine orbit scene"></main>
+    <div class="blender-grade" aria-hidden="true"></div>
+
+    <nav class="top-nav" aria-label="Main">
+      <a href="#">WORK</a>
+      <span></span>
+      <a href="#">CONTACT</a>
+    </nav>
+
+    <aside class="side-menu" aria-label="Categories">
+      <p>WHAT ARE YOU LOOKING FOR?</p>
+      <a href="#">-&gt; WEBSITES</a>
+      <a href="#">-&gt; INSTALLATIONS</a>
+      <a href="#">-&gt; XR / VR / AI</a>
+      <a href="#">-&gt; MULTIPLAYER</a>
+      <a href="#">-&gt; GAMES</a>
+      <button type="button">ASK ME ANYTHING...</button>
+    </aside>
+
+    <div class="load-state" id="load-state">LOADING SCENE</div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
