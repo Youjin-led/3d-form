@@ -175,10 +175,22 @@ function addReadableCardText(cards) {
     sprite.position.copy(center).add(radial.multiplyScalar(0.11));
     const width = Math.max(size.x, size.z, 2.2) * (order === 0 ? 1.08 : 0.82);
     sprite.scale.set(width, width * 0.60, 1);
+    sprite.userData.railIndex = order;
     sprite.renderOrder = 5;
+    cardTextSprites.push(sprite);
     textGroup.add(sprite);
   });
   scene.add(textGroup);
+}
+
+function updateReadableCardText() {
+  if (!cardTextSprites.length) return;
+  const active = cardRail.targetIndex;
+  cardTextSprites.forEach((sprite) => {
+    const distance = Math.abs((sprite.userData.railIndex ?? 0) - active);
+    const targetOpacity = distance === 0 ? 0.96 : distance === 1 ? 0.18 : 0.035;
+    sprite.material.opacity = THREE.MathUtils.lerp(sprite.material.opacity, targetOpacity, 0.12);
+  });
 }
 
 function moveRail(direction) {
@@ -254,6 +266,7 @@ const shaderClock = { value: 0 };
 const cardTextureCache = new Map();
 const cardBackTextureCache = new Map();
 const cardTextTextureCache = new Map();
+const cardTextSprites = [];
 const cardTitles = [
   'SUSTAINABLE\nHORIZONS',
   'E.C.H.O.',
@@ -1049,6 +1062,7 @@ function animate() {
     }
     camera.lookAt(cardRail.currentTarget);
   }
+  updateReadableCardText();
   composer.render();
 }
 
