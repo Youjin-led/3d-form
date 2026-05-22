@@ -46,7 +46,6 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.82;
 stage.appendChild(renderer.domElement);
-addStarField();
 
 const composer = new EffectComposer(renderer);
 composer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
@@ -1010,6 +1009,8 @@ function toDisplayMaterial(label, source) {
 
   if (isSpaceDust || isUi) {
     const displayColor = source.color ? source.color.clone() : new THREE.Color(0xffffff);
+    const isReferenceParticle = /reference_volume_dust|reference_spine_spark|reference_particle/.test(label);
+    const isReferenceRibbon = /reference_depth_ribbon|reference_ribbon|milky_way_ribbon/.test(label);
     if (isSpaceDust) {
       displayColor.offsetHSL(0.0, 0.22, 0.04);
     }
@@ -1018,7 +1019,7 @@ function toDisplayMaterial(label, source) {
       map: source.map || null,
       color: displayColor,
       transparent: true,
-      opacity: isSpaceDust ? 0.055 : 0.72,
+      opacity: isReferenceParticle ? 0.58 : isReferenceRibbon ? 0.10 : isSpaceDust ? 0.14 : 0.72,
       blending: isSpaceDust ? THREE.AdditiveBlending : THREE.NormalBlending,
       depthWrite: false,
       side: THREE.DoubleSide
@@ -1059,7 +1060,7 @@ loadBlenderMaterialOverrides().then((materialOverrides) => loader.load(
         object.visible = false;
         return;
       }
-      if (/star|dust|milky/i.test(object.name)) {
+      if (/reference_depth_ribbon/i.test(object.name)) {
         object.visible = false;
         return;
       }
